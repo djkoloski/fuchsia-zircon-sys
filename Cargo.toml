@@ -1,0 +1,25 @@
+# Copyright 2024 The Fuchsia Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+[package]
+name = "fuchsia-zircon-sys"
+version = "0.4.0-alpha.2"
+license = "BSD-3-Clause"
+authors = ["David Koloski <dkoloski@google.com>"]
+description = "Types for low-level Rust bindings for the Zircon kernel"
+repository = "https://fuchsia.googlesource.com"
+edition = "2021"
+
+[dependencies]
+fuchsia-zircon-types = "0.4.0-alpha.2"
+# Dependencies only used when compiled as part of the standard library
+core = { version = "1.0.0", optional = true, package = "rustc-std-workspace-core" }
+compiler_builtins = { version = "0.1", optional = true }
+
+[features]
+default = []
+rustc-dep-of-std = ["core", "compiler_builtins", "fuchsia-zircon-types/rustc-dep-of-std"]
+
+[patch.crates-io]
+fuchsia-zircon-types = { path = "/usr/local/google/home/dkoloski/fuchsia/src/lib/zircon/rust/fuchsia-zircon-types" }
